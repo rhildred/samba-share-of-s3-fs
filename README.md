@@ -21,7 +21,7 @@ On a swarm master from [these instructions](https://github.com/dperson/samba) ru
 ```
 
 docker service create --name samba -p 139:139 -p 445:445  \
-	--mount type=bind,source=/g,destination=/myvol,volume-label="color=red",volume-label="shape=round" \
+	--mount type=bind,source=/g,destination=/myvol \
        dperson/samba -u "example1;badpass" \
 -s "data;/myvol;no;no;no;example1" -p    
 
