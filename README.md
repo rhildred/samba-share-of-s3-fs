@@ -20,10 +20,7 @@ On a swarm master from [these instructions](https://github.com/dperson/samba) ru
 
 ```
 
-docker service create --name samba -p 139:139 -p 445:445  \
-	--mount type=bind,source=/g/g-drive,destination=/myvol \
-       dperson/samba -u "example1;badpass" \
--s "data;/myvol;no;no;no;example1" -p    
+docker service create --name samba --network traefik-public -p 139:139 -p 445:445  --mount type=bind,source=/g/g-drive,destination=/myvol dperson/samba -s "data;/myvol;yes;no;yes;all;none;;comment1" -p
 
 ```
 
@@ -35,7 +32,13 @@ Then on my linux swarm instances I followed [these instructions](http://timlehr.
 
 ```
 
-On my windows swarm instances I plan to join the swarm as a worker and create this `C:\data\smbshare.ps1`:
+On my windows swarm instances I plan to join the swarm:
+
+```
+Set-Itemproperty -path HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters -Name 'AllowInsecureGuestAuth' -Value '1'
+
+mklink /f "c:\g" \\rivendaleprivate.selab.ca\data
+```
 
 ```
 
