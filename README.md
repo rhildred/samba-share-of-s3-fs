@@ -20,7 +20,7 @@ On a swarm master from [these instructions](https://github.com/dperson/samba) ru
 
 ```
 
-docker service create --name samba --network traefik-public -p 139:139 -p 445:445  --mount type=bind,source=/g/g-drive,destination=/myvol dperson/samba -s "data;/myvol;yes;no;yes;all;none;;comment1" -p
+docker service create --name samba --network showcase -p 139:139 -p 445:445  --mount type=bind,source=/g/g-drive,destination=/myvol dperson/samba -s "data;/myvol;yes;no;yes;all;none;;comment1" -p
 
 ```
 
